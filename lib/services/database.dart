@@ -42,7 +42,11 @@ class DatabaseService {
         .collection('QNA')
         .add(questionData)
         .catchError((e) {
-          print(e.toString());
-        });
+      print(e.toString());
+    });
   }
+
+  // getQuizData() async {
+  //  await FirebaseFirestore.instance.collection('Quiz').snapshots();
+  // }
 }
