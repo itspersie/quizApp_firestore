@@ -30,6 +30,8 @@ class _PlayQuizState extends State<PlayQuiz> {
     Map<String, dynamic> doc = questionDocumentSnapshot.data();
     questionModel.question = doc['question'];
 
+    //print('question model question' + questionModel.question);
+
     print(doc);
 
     List<String> options = [
@@ -40,6 +42,8 @@ class _PlayQuizState extends State<PlayQuiz> {
     ];
 
     options.shuffle();
+
+    //print(options);
 
     questionModel.option1 = options[0];
     questionModel.option2 = options[1];
@@ -55,9 +59,8 @@ class _PlayQuizState extends State<PlayQuiz> {
   void initState() {
     print("${widget.quizId}");
 
-    
     databaseService.getQuizData(widget.quizId).then((value) {
-     // print("getquizdata" + value);
+      // print("getquizdata" + value);
       querySnapshot = value;
       notattempted = 0;
       correct = 0;
@@ -88,11 +91,11 @@ class _PlayQuizState extends State<PlayQuiz> {
             querySnapshot.docs == null
                 ? Container()
                 : ListView.builder(
-                    shrinkWrap: true,
-                   // physics: ClampingScrollPhysics(),
+                   shrinkWrap: true,
+                   physics: ClampingScrollPhysics(),
                     itemCount: querySnapshot.docs.length,
                     itemBuilder: (context, index) {
-                      return QuizPlayTile(
+                      return QuizPlayTile(questionmodel:
                         getQuestionModelFromDataSnapshot(
                             querySnapshot.docs[index]),
                         index: index,
@@ -108,7 +111,7 @@ class _PlayQuizState extends State<PlayQuiz> {
 class QuizPlayTile extends StatefulWidget {
   final QuestionModel questionmodel;
   final int index;
-  QuizPlayTile(QuestionModel questionModelFromDataSnapshot,
+  QuizPlayTile(
       {this.questionmodel, this.index});
   @override
   _QuizPlayTileState createState() => _QuizPlayTileState();
@@ -121,6 +124,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+      
         children: [
           Text(widget.questionmodel.question),
           SizedBox(height: 4),
