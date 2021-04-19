@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/widgets.dart';
 
 class Results extends StatefulWidget {
   final int correct, incorrect, total;
@@ -25,6 +26,14 @@ class _ResultsState extends State<Results> {
               ),
               Text(
                   "You answered ${widget.correct} correctly And ${widget.incorrect} incorrectly"),
+              SizedBox(
+                height: 14,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: amberButton(context: context, label: "Home"))
             ],
           ),
         ),
